@@ -1,12 +1,8 @@
-from StringAlgorithm import SuffixArray
+from StringAlgorithm import Manacher
+
 
 def main():
-  S = input()
-  n = len(S)
-
-  S = list(map(ord, S + '$'))
-  lcp = SuffixArray.lcp_array(S, SuffixArray.suffix_array(S))
-  print(n * (n + 1) // 2 - sum(lcp))
+  print(Manacher.enumerate_palindromes("mississippi"))
 
 if __name__ == "__main__":
   main()
