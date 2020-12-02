@@ -8,5 +8,3 @@ def divisor(n):
                 ret.append(n // i)
         i += 1
     return sorted(ret)
-
-print(divisor(12354))
