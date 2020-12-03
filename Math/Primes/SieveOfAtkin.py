@@ -1,4 +1,4 @@
-def sieve_of_atkin(M=10 ** 6):
+def sieve_of_atkin(M = 10 ** 6):
     p = [0] * (M + 60)
     sqrtM = M ** 0.5
     for x in range(1, int(sqrtM / 2) + 1):
