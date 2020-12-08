@@ -1,16 +1,30 @@
-def prime_counting(n):
-    r = int(n ** 0.5)
-    assert r * r <= n and (r + 1) ** 2 > n
-    V = [0] + [n // i for i in range(1, r + 1)]
-    V += list(range(V[-1] - 1, 0, -1))
-    S = [i - 1 for i in V]
-    for p in range(2, r + 1):
-        if S[-p] > S[-p + 1]:
-            sp = S[-p + 1]
-            p2 = p * p
-            for i in range(1, 2 * r + 1):
-                v = V[i]
-                if v < p2:
-                    break
-                S[i] -= (S[-(v // p) if v // p <= r else i * p] - sp)
-    return S[1]
+def countPrimes(n):
+    v = int(n ** 0.5)
+    higher = [0] * (v + 2)
+    lower  = [0] * (v + 2)
+    used   = [False] * (v + 2)
+    result = n - 1
+    for p in range(2, v + 1):
+        lower[p] = p - 1
+        higher[p] = n // p - 1
+    for p in range(2, v + 1):
+        if lower[p] == lower[p - 1]:
+            continue
+        temp = lower[p - 1]
+        result -= higher[p] - temp
+        pxp = p * p
+        end = min(v, n // pxp)
+        j = 1 + (p & 1)
+        for i in range(p + j, end + 2, j):
+            if used[i]:
+                continue
+            d = i * p
+            if d <= v:
+                higher[i] -= higher[d] - temp
+            else:
+                higher[i] -= lower[n // d] - temp
+        for i in range(v, pxp - 1, -1):
+            lower[i] -= lower[i // p] - temp
+        for i in range(pxp, end + 1, p * j):
+            used[i] = True
+    return result
