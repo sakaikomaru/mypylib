@@ -1,19 +1,21 @@
-def z_algorithm(s):
+def Z_algorithm(s):
     n = len(s)
-    Z = [0] * n
-    Z[0] = n
+    if n == 0:
+        return [];
+    z = [0] * n
+    z[0] = n
     i, j = 1, 0
     while i < n:
         while i + j < n and s[j] == s[i + j]:
             j += 1
-        Z[i] = j
+        z[i] = j
         if j == 0:
             i += 1
             continue
         k = 1
-        while k < j and k + Z[k] < j:
-            Z[i + k] = Z[k]
+        while k < j and k + z[k] < j:
+            z[i + k] = z[k]
             k += 1
         i += k
         j -= k
-    return Z
+    return z
